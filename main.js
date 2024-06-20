@@ -56,6 +56,24 @@ const posts = [
     }
 ];
 
+// creo nuovo array estrapolando le date già presenti nell'array posts
+const dateArray = posts.map((data) => {
+    return data.created;
+})
+
+// creo array con le date nel formato corretto
+const newDates = dateArray.map((element) => {
+    let dividedDate = element.split("-");
+    let newDate = dividedDate[2] + '-' + dividedDate[1] + '-' + dividedDate[0];
+
+    return newDate;
+})
+
+// estrapolo le date corrette dall'array
+newDates.forEach((element, index) => {
+    index++;
+    dataOk = element;
+})
 
 // richiamo container 
 const container = document.getElementById("container");
@@ -71,7 +89,7 @@ posts.forEach((element) => {
                     </div>
                     <div class="post-meta__data">
                         <div class="post-meta__author">${element.author.name}</div>
-                        <div class="post-meta__time">${element.created}</div>
+                        <div class="post-meta__time">${dataOk}</div>
                     </div>                    
                 </div>
             </div>
@@ -92,7 +110,7 @@ posts.forEach((element) => {
                     </div>
                 </div> 
             </div>            
-        </div>`;
+        </div>`;       
 });
 
 
@@ -113,3 +131,4 @@ likeBtns.forEach((likeBtn, index) => {
         }
     )
 });
+
