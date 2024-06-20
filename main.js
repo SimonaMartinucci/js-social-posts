@@ -56,30 +56,21 @@ const posts = [
     }
 ];
 
-// creo nuovo array estrapolando le date già presenti nell'array posts
-const dateArray = posts.map((data) => {
-    return data.created;
+// creo nuovo array copiando posts e modificando solo le date per metterle nel formato corretto
+const newDates = posts.map((post) => {
+    return {...post,
+        created:
+    post.created.split("-").reverse().join("-")
+    }
 })
 
-// creo array con le date nel formato corretto
-const newDates = dateArray.map((element) => {
-    let dividedDate = element.split("-");
-    let newDate = dividedDate[2] + '-' + dividedDate[1] + '-' + dividedDate[0];
-
-    return newDate;
-})
-
-// estrapolo le date corrette dall'array
-newDates.forEach((element, index) => {
-    index++;
-    dataOk = element;
-})
+console.log(newDates);
 
 // richiamo container 
 const container = document.getElementById("container");
 
-// genero ciclo per inserire tutti i post con i vari contenuti
-posts.forEach((element) => {
+// genero ciclo su nuovo array con date corrette per inserire tutti i post con i vari contenuti
+newDates.forEach((element) => {
     container.innerHTML += `
         <div class="post">
             <div class="post__header">
@@ -89,7 +80,7 @@ posts.forEach((element) => {
                     </div>
                     <div class="post-meta__data">
                         <div class="post-meta__author">${element.author.name}</div>
-                        <div class="post-meta__time">${dataOk}</div>
+                        <div class="post-meta__time">${element.created}</div>
                     </div>                    
                 </div>
             </div>
